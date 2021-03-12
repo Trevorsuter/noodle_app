@@ -7,9 +7,17 @@ RSpec.describe 'welcome page', type: :feature do
   end
 
   it 'has an option to create a new user' do
-    save_and_open_page
-    expect(page).to have_Link("Create New User")
+
+    expect(page).to have_link("Create one")
+
+    click_link 'Create one'
+    expect(current_path).to eq(new_user_path)
   end
 
-  it 'has an option to login'
+  it 'has an option to login' do
+
+    expect(page).to have_field('Email:')
+    expect(page).to have_field('Password:')
+
+  end
 end

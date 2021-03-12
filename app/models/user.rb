@@ -1,8 +1,10 @@
 class User < ApplicationRecord
-  belongs_to :partner, :foreign_key => :partner_id, :class_name => 'User', :inverse_of => :partner, optional: true
+  belongs_to :partner, foreign_key: :partner_id, class_name: 'User', inverse_of: :partner, optional: true
 
   validates_presence_of :name
-  validates_presence_of :email
+  validates :email, uniqueness: true, presence: true
   validates_presence_of :birthday
-  validates_presence_of :password
+  validates_presence_of :password, require: true
+
+  has_secure_password
 end

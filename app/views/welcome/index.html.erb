@@ -1,0 +1,19 @@
+<header>
+  <h1 class="welcome-header">NoodleHub</h1>
+</header>
+
+<body class="welcome-body">
+  <section class="welcome-login">
+    <h3 class="welcome-header" style="color: lightgray; text-align: center; text-decoration: underline;">Login:</h4>
+    <div style="text-align: center; color: white; font-weight: bold;">
+      <%= form_with method: :get, local: :true do |f| %>
+      <%= f.label :email, "Email: " %> <br>
+      <%= f.text_field :email %> <br><br>
+      <%= f.label :password, "Password:" %> <br>
+      <%= f.password_field :password %> <br><br>
+      <%= f.submit :login %>
+      <% end %> <br>
+      <p style="font-style: italic; font-size: smaller; color: white;">Need an account? <%= link_to "Create one", new_user_path, style: "color: white;" %>.
+    </div>
+  </section>
+</body>

@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get '/', to: 'welcome#index', as: 'welcome'
+  resources :users, only: [:show] do
+    scope module: :user do
+      resources :dashboard, only: [:index]
+    end
+  end
 end

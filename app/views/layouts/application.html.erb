@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noodle</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <% if logged_in? %>
+    <header>
+      <p style="text-align: right;"><%= link_to current_user.name, user_dashboard_index_path(current_user) %></p>
+    </header>
+  <% end %>
 
   <body>
     <% flash.each do |type, message| %>

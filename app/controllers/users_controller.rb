@@ -6,10 +6,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    session[:user_id] = @user.id
     if @user.save
       flash[:notice] = "New account created, Welcome to NoodleHub!"
       redirect_to user_dashboard_index_path(@user)
+      session[:user_id] = @user.id
     else
       flash[:notice] = "Couldn't create your new account, maybe you forgot some information?"
       render :new

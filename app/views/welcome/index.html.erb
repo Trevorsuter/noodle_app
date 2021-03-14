@@ -1,11 +1,7 @@
-<header>
-  <h1 class="welcome-header">NoodleHub</h1>
-</header>
-
-<body class="welcome-body">
-  <section class="welcome-login">
-    <h3 class="welcome-header" style="color: lightgray; text-align: center; text-decoration: underline;">Login:</h4>
-    <div style="text-align: center; color: white; font-weight: bold;">
+<body>
+  <section class="container">
+    <div class="jumbotron bg-light center-align shadow p-3 mb-5 bg-white rounded">
+    <h3 class="welcome-header">Login:</h4>
       <%= form_with url: login_path, local: :true do |f| %>
       <%= f.label :email, "Email: " %> <br>
       <%= f.text_field :email %> <br><br>
@@ -13,7 +9,7 @@
       <%= f.password_field :password %> <br><br>
       <%= f.submit :login %>
       <% end %> <br>
-      <p style="font-style: italic; font-size: smaller; color: white;">Need an account? <%= link_to "Create one", new_user_path, style: "color: white;" %>.
+      <p>Need an account? <%= link_to "Create one", new_user_path %>.</p>
     </div>
   </section>
 </body>

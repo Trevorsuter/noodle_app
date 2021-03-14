@@ -28,9 +28,31 @@ RSpec.describe 'new user page', type: :feature do
     expect(page).to have_content('')
   end
 
-  it 'cannot create a new user without completing all fields'
+  it 'cannot create a new user without completing all fields' do
+    fill_in 'user[name]', with: "Trevor Suter"
+    click_button 'Create your Profile!'
+    expect(page).to have_content("Couldn't create your new account, maybe you forgot some information?")
 
-  it 'cannot create a user with a taken account email'
+    fill_in 'user[birthday]', with: "02/01/1997"
+    click_button 'Create your Profile!'
+    expect(page).to have_content("Couldn't create your new account, maybe you forgot some information?")
 
-  it 'redirects to the new users dashboard after successful creation'
+    fill_in 'user[email]', with: "Trevorsuter@icloud.com"
+    click_button 'Create your Profile!'
+    expect(page).to have_content("Couldn't create your new account, maybe you forgot some information?")
+
+    fill_in 'user[password]', with: "password"
+    click_button 'Create your Profile!'
+    expect(page).to have_content("New account created, Welcome to NoodleHub!")
+  end
+
+  it 'cannot create a user with a taken account email' do
+    fill_in 'user[name]', with: "Trevor Suter"
+    fill_in 'user[birthday]', with: "02/01/1997"
+    fill_in 'user[email]', with: "Alexissayles@colorado.edu"
+    fill_in 'user[password]', with: "password"
+    click_button 'Create your Profile!'
+
+    expect(page).to have_content("Couldn't create your new account, maybe you forgot some information?")
+  end
 end

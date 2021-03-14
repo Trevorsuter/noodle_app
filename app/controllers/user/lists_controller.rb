@@ -5,6 +5,9 @@ class User::ListsController < ApplicationController
   def index
   end
 
+  def new
+  end
+
   private
   def find_user
     @user = User.find(params[:user_id])

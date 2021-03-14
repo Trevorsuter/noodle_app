@@ -1,11 +1,8 @@
-<header>
-  <h1>Welcome to NoodleHub!</h1>
-</header>
 
 <body>
-  <section class="welcome-login">
-    <h3 style="color: lightgray; text-align: center; text-decoration: underline;"><i>We just need a little bit of information from you!</i></h1>
-    <div style="text-align: center; color: white; font-weight: bold;">
+  <section class="container">
+    <div class="jumbotron bg-light center-align shadow p-3 mb-5 bg-white rounded">
+      <h3 class="welcome-header"><i>We just need a little bit of information from you!</i></h3>
       <%= form_with model: @user, url: users_path, local: :true do |f|%>
         <%= f.label :name, "Name:" %> <br>
         <%= f.text_field :name %> <br><br>

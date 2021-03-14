@@ -2,7 +2,7 @@
 <html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <head>
-    <title>Noodle</title>
+    <title>Coupl</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <nav class="navbar navbar-dark">
-        <h4 class="center-align shadow-text"><b><i><%= link_to "Cupl", root_path %></i></b></h4>
+        <h4 class="center-align shadow-text"><b><i><%= link_to "Coupl", root_path %></i></b></h4>
         <% if logged_in? %>
           <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,8 +26,9 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
               <%= link_to "Dashboard", user_dashboard_index_path(current_user), class: "dropdown-item text-dark" %>
+              <%= link_to "Lists", user_lists_path(current_user), class: "dropdown-item text-secondary" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Log Out", logout_path, method: :delete, class: "dropdown-item text-dark" %>
+              <li><%= link_to "Log Out", logout_path, method: :delete, class: "dropdown-item text-dark" %></li>
             </div>
           </div>
         <% end %>

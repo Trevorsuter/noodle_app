@@ -26,5 +26,27 @@ RSpec.describe 'user list new page', type: :feature do
     visit new_user_list_path(@user1)
   end
   
-  it 'has the correct forms for a list'
+  it 'has the correct forms for a list' do
+
+    expect(page).to have_field('name')
+    expect(page).to have_button('create')
+  end
+
+  it 'can create a new list' do
+    fill_in :name, with: "New List Created"
+    click_button 'create'
+
+    expect(current_path).to eq(user_lists_path(@user1.id))
+    within("#lists") do
+      expect(page).to have_content("New List Created")
+    end
+  end
+
+  it 'will not create a new list if a name isnt given' do
+    click_button 'create'
+
+    expect(page).to have_content("Please fill in a name.")
+    expect(page).to have_field('name')
+    expect(page).to have_button('create')
+  end
 end

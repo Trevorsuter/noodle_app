@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'user lists index page', type: :feature do
+RSpec.describe 'user list new page', type: :feature do
   before :each do
     @user1 = User.create!(name: "Alexis Sayles", birthday: DateTime.new(1998, 5, 13), email: "Alexissayles@colorado.edu", password: "password")
     @user2 = User.create!(name: "Trevor Suter", birthday: DateTime.new(1997, 2, 1), email: "Trevorsuter@icloud.com", password: "password")
@@ -23,37 +23,8 @@ RSpec.describe 'user lists index page', type: :feature do
     fill_in "email", with: "#{@user1.email}"
     fill_in "password", with: "#{@user1.password}"
     click_button 'login'
-    visit user_lists_path(@user1)
-  end
-
-  it 'has a button to create a lew list' do
-
-    expect(page).to have_button("Create a List")
-
-    click_button "Create a List"
-
-    expect(current_path).to eq(new_user_list_path(@user1.id))
+    visit new_user_list_path(@user1)
   end
   
-  it 'displays all of the users lists' do
-
-    within("#lists") do
-      expect(page).to_not have_content(@classwork.name)
-      expect(page).to_not have_content(@garage.name)
-
-      expect(page).to have_content(@groceries.name)
-      expect(page).to have_content(@movies.name)
-      expect(page).to have_content(@places.name)
-    end
-  end
-  
-  it 'each list displays its tasks' do
-    
-    within("#list-#{@groceries.id}") do
-      expect(page).to_not have_content(@tools.name)
-      expect(page).to_not have_content(@dubai.name)
-
-      expect(page).to have_content(@bananas.name)
-    end
-  end
+  it 'has the correct forms for a list'
 end

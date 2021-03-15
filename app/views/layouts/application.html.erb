@@ -10,13 +10,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <header>
-    <div class="pos-f-t">
-      <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-          <h5 class="text-white h4">Collapsed content</h5>
-          <span class="text-muted">Toggleable via the navbar brand.</span>
-        </div>
-      </div>
       <nav class="navbar navbar-dark">
         <h4 class="center-align shadow-text"><b><i><%= link_to "Coupl", root_path %></i></b></h4>
         <% if logged_in? %>
@@ -33,7 +26,6 @@
           </div>
         <% end %>
       </nav>
-    </div>
   </header>
 
   <body>

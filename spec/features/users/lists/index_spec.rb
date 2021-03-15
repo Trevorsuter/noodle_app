@@ -3,10 +3,21 @@ require 'rails_helper'
 RSpec.describe 'user lists index page', type: :feature do
   before :each do
     @user1 = User.create!(name: "Alexis Sayles", birthday: DateTime.new(1998, 5, 13), email: "Alexissayles@colorado.edu", password: "password")
+    @user2 = User.create!(name: "Trevor Suter", birthday: DateTime.new(1997, 2, 1), email: "Trevorsuter@icloud.com", password: "password")
     
     @groceries = @user1.lists.create!(name: "Groceries")
     @movies = @user1.lists.create!(name: "Movies to Watch")
     @places = @user1.lists.create!(name: "Places to Visit")
+    @classwork = @user2.lists.create!(name: "Classwork")
+    @garage = @user2.lists.create!(name: "Garage")
+
+    @bananas = Task.create!(name: "Bananas", description: "Make sure they're fresh!", due: Date.today, status: "incomplete")
+    @tools = Task.create!(name: "Organize Tools", description: "By size", due: Date.today, status: "incomplete")
+    @dubai = Task.create!(name: "Dubai", status: "incomplete")
+
+    ListTask.create!(list: @groceries, task: @bananas)
+    ListTask.create!(list: @garage, task: @tools)
+    ListTask.create!(list: @places, task: @dubai)
     
     visit root_path
     fill_in "email", with: "#{@user1.email}"
@@ -24,7 +35,25 @@ RSpec.describe 'user lists index page', type: :feature do
     expect(current_path).to eq(new_user_list_path(@user1.id))
   end
   
-  it 'displays all of the users lists'
+  it 'displays all of the users lists' do
+
+    within("#lists") do
+      expect(page).to_not have_content(@classwork.name)
+      expect(page).to_not have_content(@garage.name)
+
+      expect(page).to have_content(@groceries.name)
+      expect(page).to have_content(@movies.name)
+      expect(page).to have_content(@places.name)
+    end
+  end
   
-  it 'each list displays its tasks'
+  it 'each list displays its tasks' do
+    save_and_open_page
+    within("#list-#{@groceries.id}") do
+      expect(page).to_not have_content(@tools.name)
+      expect(page).to_not have_content(@dubai.name)
+
+      expect(page).to have_content(@bananas.name)
+    end
+  end
 end

@@ -4,3 +4,16 @@
     <%= button_to "Create a List", new_user_list_path, method: :get, class: "btn btn-outline-secondary" %>
   </div>
 </header>
+
+<body>
+  <div id="lists">
+    <% @lists.each do |list| %>
+      <section class="container" id="list-<%= list.id %>">
+        <h4><%= list.name %></h4>
+        <% list.tasks.each do |task| %>
+          <div class="col"><%= task.name %></div>
+        <% end %>
+      </section>
+    <% end %>
+  </div>
+</body>

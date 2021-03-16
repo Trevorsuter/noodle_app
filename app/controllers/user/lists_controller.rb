@@ -1,6 +1,7 @@
 class User::ListsController < ApplicationController
   before_action :find_user
   before_action :find_user_lists
+  before_action :find_list, only: [:destroy]
   before_action :confirm_user
 
   def index
@@ -21,6 +22,11 @@ class User::ListsController < ApplicationController
     end
   end
 
+  def destroy
+    @list.destroy
+    redirect_to user_lists_path(@user)
+  end
+
   private
   def find_user
     @user = User.find(params[:user_id])
@@ -34,5 +40,10 @@ class User::ListsController < ApplicationController
   private
   def list_params
     params.require(:list).permit(:name)
+  end
+
+  private
+  def find_list
+    @list = List.find(params[:id])
   end
 end

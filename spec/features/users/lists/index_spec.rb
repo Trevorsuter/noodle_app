@@ -66,5 +66,18 @@ RSpec.describe 'user lists index page', type: :feature do
         expect(page).to have_link('Create A Task')
       end
     end
+
+    it 'can be deleted' do
+      within("#list-#{@groceries.id}") do
+        click_link 'Delete'
+      end
+
+      expect(current_path).to eq(user_lists_path(@user1))
+      within ("#lists") do
+        expect(page).to_not have_content(@groceries.name)
+
+        expect(page).to have_content(@places.name)
+      end
+    end
   end
 end

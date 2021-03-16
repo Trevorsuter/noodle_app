@@ -4,6 +4,7 @@ class User::ListsController < ApplicationController
   before_action :confirm_user
 
   def index
+    binding.pry
   end
 
   def new

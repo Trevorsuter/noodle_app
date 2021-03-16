@@ -7,3 +7,4 @@ This app is designed for couples to have their own 'homepage'. Think of it as a 
 - Add to a calendar
 - Store pictures
 - Keep infamous quotes and snippets
+- Keep score of your favorite board games

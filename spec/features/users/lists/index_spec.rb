@@ -19,10 +19,7 @@ RSpec.describe 'user lists index page', type: :feature do
     ListTask.create!(list: @garage, task: @tools)
     ListTask.create!(list: @places, task: @dubai)
     
-    visit root_path
-    fill_in "email", with: "#{@user1.email}"
-    fill_in "password", with: "#{@user1.password}"
-    click_button 'login'
+    login(@user1)
     visit user_lists_path(@user1)
   end
 

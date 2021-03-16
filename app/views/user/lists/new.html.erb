@@ -1,0 +1,13 @@
+<body>
+  <div class="center-align">
+    <section class="container">
+      <div class="jumbotron bg-light center-align shadow p-3 mb-5 bg-white rounded">
+        <h3 class="welcome-header"><i>New List:</i></h3>
+        <%= form_with model: @list, url: user_lists_path(@user), local: :true do |f| %>
+          <%= f.text_field :name, placeholder: "name", class: "center-align" %> <br><br>
+          <%= f.submit :create, class: "bg-secondary text-white" %>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</body>

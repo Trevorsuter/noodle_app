@@ -1,0 +1,5 @@
+<%= form_with model: @partner_request, local: :true do |f|%>
+  <%= f.label :partner_email, "Partner's Email:" %>
+  <%= f.email_field :partner_email %>
+  <%= f.submit "Request" %>
+<% end %>

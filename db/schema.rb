@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_205916) do
+ActiveRecord::Schema.define(version: 2021_03_16_231735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,9 +45,6 @@ ActiveRecord::Schema.define(version: 2021_03_16_205916) do
     t.date "birthday"
     t.bigint "partner_id"
     t.string "password_digest"
-    t.boolean "partner_confirmed", default: false
-    t.string "confirmation_token"
-    t.boolean "email_confirmed", default: false
     t.index ["partner_id"], name: "index_users_on_partner_id"
   end
 

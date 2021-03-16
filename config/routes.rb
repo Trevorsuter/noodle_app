@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :partner_requests, only: [:new, :create]
+
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 end

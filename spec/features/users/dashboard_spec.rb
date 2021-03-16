@@ -24,6 +24,7 @@ RSpec.describe 'user dashboard index spec', type: :feature do
   end
 
   it 'has a form to add a partner when one isnt assigned' do
-
+    expect(page).to have_field('partner_request[partner_email]')
+    expect(page).to have_button("Request")
   end
 end

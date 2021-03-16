@@ -6,6 +6,11 @@ Rails.application.routes.draw do
       resources :lists
     end
   end
+  resources :lists, only: [:show] do
+    scope module: :list do
+      resources :tasks
+    end
+  end
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

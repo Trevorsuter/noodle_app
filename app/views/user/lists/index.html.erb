@@ -3,17 +3,31 @@
   <div class="center-align">
     <%= button_to "Create a List", new_user_list_path, method: :get, class: "btn btn-outline-secondary" %>
   </div>
-</header>
+</header><hr>
 
 <body>
-  <div id="lists">
+  <div class="card-columns" id="lists">
     <% @lists.each do |list| %>
-      <section class="container" id="list-<%= list.id %>">
-        <h4><%= list.name %></h4>
-        <% list.tasks.each do |task| %>
-          <div class="col"><%= task.name %></div>
-        <% end %>
-      </section>
+      <div class="card">
+        <div class="card text-center" id="list-<%= list.id %>">
+          <div class="card-body">
+            <div class="card-title btn-group dropend">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <b><i><%= list.name %></i></b>
+              </button>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Create A Task", new_list_task_path(list), class: "dropdown-item text-success" %></li>
+                <div class="dropdown-divider"></div>
+                <li><%= link_to "Edit", edit_user_list_path(@user, list), class: "dropdown-item text-secondary"%></li>
+                <li><%= link_to "Delete", user_list_path(@user, list), method: :delete, class: "dropdown-item text-danger" %></li>
+              </ul>
+            </div>
+            <% list.tasks.each do |task| %>
+              <div class="card-body col"><%= task.name %></div>
+            <% end %>
+          </div>  
+        </div>  
+      </div>
     <% end %>
   </div>
 </body>

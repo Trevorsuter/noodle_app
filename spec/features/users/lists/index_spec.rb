@@ -35,25 +35,36 @@ RSpec.describe 'user lists index page', type: :feature do
     expect(current_path).to eq(new_user_list_path(@user1.id))
   end
   
-  it 'displays all of the users lists' do
+  describe 'lists' do
+    it 'are all displayed' do
 
-    within("#lists") do
-      expect(page).to_not have_content(@classwork.name)
-      expect(page).to_not have_content(@garage.name)
+      within("#lists") do
+        expect(page).to_not have_content(@classwork.name)
+        expect(page).to_not have_content(@garage.name)
 
-      expect(page).to have_content(@groceries.name)
-      expect(page).to have_content(@movies.name)
-      expect(page).to have_content(@places.name)
+        expect(page).to have_content(@groceries.name)
+        expect(page).to have_content(@movies.name)
+        expect(page).to have_content(@places.name)
+      end
     end
-  end
-  
-  it 'each list displays its tasks' do
     
-    within("#list-#{@groceries.id}") do
-      expect(page).to_not have_content(@tools.name)
-      expect(page).to_not have_content(@dubai.name)
+    it 'display their tasks' do
+      
+      within("#list-#{@groceries.id}") do
+        expect(page).to_not have_content(@tools.name)
+        expect(page).to_not have_content(@dubai.name)
 
-      expect(page).to have_content(@bananas.name)
+        expect(page).to have_content(@bananas.name)
+      end
+    end
+
+    it 'has options to edit and delete, and create a new task' do
+      within("#list-#{@groceries.id}") do
+        expect(page).to have_button("#{@groceries.name}")
+        expect(page).to have_link('Edit')
+        expect(page).to have_link('Delete')
+        expect(page).to have_link('Create A Task')
+      end
     end
   end
 end

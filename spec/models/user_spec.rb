@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   describe 'relationships' do
     it { should belong_to(:partner).optional }
     it { should have_many :lists }
+    it { should have_many :partner_requests }
   end
   describe 'validations' do
     it { should validate_presence_of :name }

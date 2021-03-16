@@ -6,10 +6,7 @@ RSpec.describe 'new list task page', type: :feature do
     @groceries = @user1.lists.create!(name: "Groceries")
     @housekeeping = @user1.lists.create!(name: "Housekeeping")
     
-    visit root_path
-    fill_in "email", with: "#{@user1.email}"
-    fill_in "password", with: "#{@user1.password}"
-    click_button 'login'
+    login(@user1)
     visit new_list_task_path(@groceries)
   end
 

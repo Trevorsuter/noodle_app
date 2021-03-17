@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     scope module: :user do
       resources :dashboard, only: [:index]
       resources :lists
+      resources :partner_requests, only: [:create, :destroy]
+      resources :partner, only: [:update]
     end
   end
   resources :lists, only: [:show] do

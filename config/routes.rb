@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     scope module: :user do
       resources :dashboard, only: [:index]
       resources :lists
+      resources :partner_requests, only: [:create, :destroy]
+      resources :partner, only: [:update]
     end
   end
   resources :lists, only: [:show] do
@@ -11,8 +13,6 @@ Rails.application.routes.draw do
       resources :tasks
     end
   end
-
-  resources :partner_requests, only: [:new, :create]
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

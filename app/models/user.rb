@@ -25,6 +25,10 @@ class User < ApplicationRecord
   end
 
   def combined_lists
-    List.joins(:user).where(user_id: [self.id, self.partner.id])
+    if !partner.nil?
+      List.joins(:user).where(user_id: [self.id, self.partner.id])
+    else
+      lists
+    end
   end
 end

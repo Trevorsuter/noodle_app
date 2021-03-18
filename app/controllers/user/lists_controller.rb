@@ -34,7 +34,7 @@ class User::ListsController < ApplicationController
 
   private
   def find_user_lists
-    @lists = @user.lists
+    @lists = @user.combined_lists
   end
   
   private

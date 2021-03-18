@@ -23,4 +23,8 @@ class User < ApplicationRecord
       pr.partner
     end
   end
+
+  def combined_lists
+    List.joins(:user).where(user_id: [self.id, self.partner.id])
+  end
 end

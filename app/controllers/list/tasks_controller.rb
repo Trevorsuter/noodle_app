@@ -11,7 +11,7 @@ class List::TasksController < ApplicationController
     if @task.save
       ListTask.create!(list: @list, task: @task)
       flash[:notice] = "Task Created!"
-      redirect_to user_lists_path(@user.id)
+      redirect_to user_lists_path(current_user)
     else
       flash[:notice] = "You must forgot to provide some information."
       render :new
@@ -24,12 +24,12 @@ class List::TasksController < ApplicationController
   def update
     @task.update_attributes(task_params)
     @task.save
-    redirect_to user_lists_path(@user)
+    redirect_to user_lists_path(current_user)
   end
 
   def destroy
     @task.destroy
-    redirect_to user_lists_path(@user)
+    redirect_to user_lists_path(current_user)
   end
 
   private

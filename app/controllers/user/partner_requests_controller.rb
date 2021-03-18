@@ -8,7 +8,7 @@ class User::PartnerRequestsController < ApplicationController
     else
       flash[:notice] = "Email Not found, could not submit your request."
     end
-    redirect_to user_dashboard_index_path(@user)
+    redirect_to user_dashboard_index_path(current_user)
   end
 
   private

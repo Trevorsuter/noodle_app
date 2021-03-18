@@ -15,7 +15,7 @@ class User::ListsController < ApplicationController
     @list = @user.lists.new(list_params)
     if @list.save
       flash[:notice] = "List Created!"
-      redirect_to user_lists_path(@user)
+      redirect_to user_lists_path(current_user)
     else
       flash[:notice] = "Please fill in a name."
       render :new
@@ -34,7 +34,7 @@ class User::ListsController < ApplicationController
 
   private
   def find_user_lists
-    @lists = @user.lists
+    @lists = @user.combined_lists
   end
   
   private

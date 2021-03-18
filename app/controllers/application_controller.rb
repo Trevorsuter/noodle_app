@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
   
   def confirm_user
-    if params[:user_id].to_s != session[:user_id].to_s
+    unless params[:user_id].to_s == current_user.partner_id.to_s || params[:user_id].to_s == current_user.id.to_s
       flash[:notice] = "You can't access this person's page."
       redirect_to user_dashboard_index_path(current_user)
     end

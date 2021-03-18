@@ -6,18 +6,23 @@
           <h4>Partner</h4>
         </div>
         <div class="card-text">
-          <% if @partner.nil? %>
+          <% if @partner.nil? && !@user.pending_request? %>
               <%= form_with url: user_partner_requests_path, local: :true do |f|%>
                 <%= f.label :partner_email, "Partner's Email:" %>
                 <%= f.email_field :partner_email %>
                 <%= f.submit "Request" %>
-            <% end %> <hr>
-            <% @user.incoming_requests_with_names.each do |request| %>
-              <strong>You have a new request from <%=request.username %>!</strong>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <%= button_to "Accept", user_partner_path(@user, request.user), method: :patch, class: "btn btn-success btn-sm" %> <%= button_to "Reject", user_partner_request_path(@user, request), method: :delete, class: "btn btn-danger btn-sm" %>
-              </div>
             <% end %>
+          <% end %>
+          <% if @user.pending_request? == true %>
+            <% @user.pending_requests.each do |p| %>
+              <p>You sent a partner request to <%= p.name %>. Waiting on their approval
+            <% end %>
+          <% end %>
+          <% @user.incoming_requests_with_names.each do |request| %>
+            <strong>You have a new request from <%=request.username %>!</strong>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <%= button_to "Accept", user_partner_path(@user, request.user), method: :patch, class: "btn btn-success btn-sm" %> <%= button_to "Reject", user_partner_request_path(@user, request), method: :delete, class: "btn btn-danger btn-sm" %>
+            </div>
           <% end %>
           <% if @partner %>
               <strong style="text-decoration: underline; font-size:larger;"><%= @partner.name %></strong> <br>

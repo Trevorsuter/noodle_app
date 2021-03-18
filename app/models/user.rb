@@ -13,4 +13,14 @@ class User < ApplicationRecord
   def incoming_requests_with_names
     PartnerRequest.joins(:user).where(partner_id: self.id).select('partner_requests.*, users.name as username')
   end
+
+  def pending_request?
+    pending_requests.any?
+  end
+
+  def pending_requests
+    partner_requests.map do |pr|
+      pr.partner
+    end
+  end
 end

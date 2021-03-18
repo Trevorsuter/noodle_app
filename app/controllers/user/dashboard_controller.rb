@@ -4,7 +4,6 @@ class User::DashboardController < ApplicationController
   before_action :confirm_user, only: [:index]
 
   def index
-    @partner_request = @user.partner_requests.new
   end
 
   private

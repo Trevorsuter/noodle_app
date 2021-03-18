@@ -22,9 +22,44 @@
                 <li><%= link_to "Delete", user_list_path(@user, list), method: :delete, class: "dropdown-item text-danger" %></li>
               </ul>
             </div>
-            <% list.tasks.each do |task| %>
-              <div class="card-body col"><%= task.name %></div>
-            <% end %>
+            <div id="list-<%= list.id %>-incomplete">
+              <% list.tasks.each do |task| %>
+                <% if task.incomplete? %>
+                  <div class="btn-group dropright card-body col">
+                    <button type="button" class="btn dropdown text-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <%= task.name %>
+                    </button>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-item"><b><i><%= task.description %></i></b></li>
+                      <li class="dropdown-item disabled text-danger"><b><i><%= task.due %></i></b></li>
+                      <div class="dropdown-divider"></div>
+                      <%= link_to "Edit", edit_list_task_path(list, task), class: "dropdown-item text-secondary" %>
+                      <%= link_to "Complete", list_task_path(list, task, task: {status: 'complete'}), method: :patch, class: "dropdown-item text-success" %>
+                      <%= link_to "Remove", list_task_path(list, task), method: :delete, class: "dropdown-item text-danger" %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div><hr>
+            <div id="list-<%= list.id %>-complete">
+              <% list.tasks.each do |task| %>
+                <% if task.complete? %>
+                  <div class="btn-group dropright card-body col">
+                    <button type="button" class="btn dropdown text-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <%= task.name %>
+                    </button>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-item"><b><i><%= task.description %></i></b></li>
+                      <li class="dropdown-item text-danger"><b><i>Due: <%= task.due %></i></b></li>
+                      <div class="dropdown-divider"></div>
+                      <%= link_to "Edit", edit_list_task_path(list, task), class: "dropdown-item text-secondary" %>
+                      <%= link_to "Incomplete", list_task_path(list, task, task: {status: 'incomplete'}), method: :patch, class: "dropdown-item text-warning" %>
+                      <%= link_to "Remove", list_task_path(list, task), method: :delete, class: "dropdown-item text-danger" %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
           </div>  
         </div>  
       </div>

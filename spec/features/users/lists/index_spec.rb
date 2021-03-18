@@ -14,6 +14,8 @@ RSpec.describe 'user lists index page', type: :feature do
     @bananas = Task.create!(name: "Bananas", description: "Make sure they're fresh!", due: Date.today, status: "incomplete")
     @tools = Task.create!(name: "Organize Tools", description: "By size", due: Date.today, status: "incomplete")
     @dubai = Task.create!(name: "Dubai", status: "incomplete")
+    @paris = Task.create!(name: "Paris", status: "complete")
+    @morocco = Task.create!(name: "Morocco", status: "incomplete")
 
     ListTask.create!(list: @groceries, task: @bananas)
     ListTask.create!(list: @garage, task: @tools)

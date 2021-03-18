@@ -1,0 +1,11 @@
+<%= form_with model: model, url: url, local: :true do |f|%>
+        <%= f.label :name, "Task:"%> <br>
+        <%= f.text_field :name %> <br><br>
+        <%= f.label :description, "Description:" %> <small class="text-secondary"><i>optional</i></small> <br>
+        <%= f.text_field :description %> <br><br>
+        <%= f.label :due, "Due:" %> <small class="text-secondary"><i>optional</i></small>  <br>
+        <%= f.date_field :due %> <br><br>
+        <%= f.label :status, "Status:" %>
+        <%= f.select :status, ['incomplete', 'complete'] %> <br><br>
+        <%= f.submit submit_text %>
+      <% end %>

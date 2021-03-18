@@ -2,7 +2,7 @@
   <section class="container">
     <div class="jumbotron bg-light center-align shadow p-3 mb-5 bg-white rounded">
       <h4 class="welcome-header"><i>New task for <%= @list.name %></i></h4><br>
-      <%= render partial: 'form', locals: {model: @task, url: list_tasks_path(@list), submit_text: "Create Task"} %>
+      <%= render partial: 'form', locals: {model: @task, url: list_task_path(@list, @task), submit_text: "Save"} %>
     </div>
   </section>
 </body>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_234501) do
+ActiveRecord::Schema.define(version: 2021_03_19_030326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(version: 2021_03_18_234501) do
     t.integer "point_limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "score_type", default: 0
+    t.bigint "winner_id"
+    t.index ["winner_id"], name: "index_competitions_on_winner_id"
   end
 
   create_table "list_tasks", force: :cascade do |t|
@@ -62,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_234501) do
     t.index ["partner_id"], name: "index_users_on_partner_id"
   end
 
+  add_foreign_key "competitions", "users", column: "winner_id"
   add_foreign_key "list_tasks", "lists"
   add_foreign_key "list_tasks", "tasks"
   add_foreign_key "lists", "users"

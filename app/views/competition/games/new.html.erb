@@ -1,0 +1,14 @@
+<body>
+  <section class="container">
+    <div class="jumbotron bg-light center-align shadow p-3 mb-5 bg-white rounded">
+      <h4 class="jumbotron-header"><i><b>New Competition</b></i></h4>
+      <%= form_with model: @game, url: competition_games_path, local: :true do |f| %>
+        <%= f.label :name, "Name:" %> <br>
+        <%= f.text_field :name %> <br><br>
+        <%= f.label :winning_score, "Winning Score:" %> <br>
+        <%= f.number_field :winning_score %> <br><br>
+        <%= f.submit "Create" %>
+      <% end %>
+    </div>
+  </section>
+</body>

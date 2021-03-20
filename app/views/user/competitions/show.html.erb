@@ -1,0 +1,21 @@
+<body>
+  <div class="card-columns">
+    <% @games.each do |game| %>
+      <div class="card">
+        <div class="card text-center">
+          <div class="card-body">
+            <div class="card-title btn-group dropend">
+              <%= button_to "#{game.name}", user_competition_game_path(current_user.id, @competition.id, game.id), method: :get, class: "btn" %>
+              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Delete", competition_game_path(@competition.id, game.id), method: :delete, class: "dropdown-item text-strong" %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</body>

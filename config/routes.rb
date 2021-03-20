@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       resources :lists
       resources :partner_requests, only: [:create, :destroy]
       resources :partner, only: [:update]
+      resources :competitions, only: [:index, :show] do
+        resources :games, only: [:show]
+      end
     end
   end
   resources :lists, only: [:show] do
@@ -15,7 +18,7 @@ Rails.application.routes.draw do
   end
   resources :competitions, only: [:new, :create, :show] do
     scope module: :competition do
-      resources :games, only: [:new]
+      resources :games, only: [:new, :create, :destroy]
     end
   end
   post '/login', to: 'sessions#create'

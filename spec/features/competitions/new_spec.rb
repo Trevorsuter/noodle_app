@@ -24,4 +24,9 @@ RSpec.describe 'competitions new page', type: :feature do
     expect(current_path).to eq(new_competition_game_path(Competition.first))
     expect(page).to have_content("Competition Created! Create a game to get started.")
   end
+
+  it 'wont create a competition without a name' do
+    click_button 'Create'
+    expect(page).to have_content("You must've forgot some information. Try again.")
+  end
 end

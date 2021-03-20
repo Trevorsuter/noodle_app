@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :competitions, only: [:new, :create]
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 end

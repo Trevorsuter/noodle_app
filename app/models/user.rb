@@ -2,6 +2,9 @@ class User < ApplicationRecord
   belongs_to :partner, foreign_key: :partner_id, class_name: 'User', inverse_of: :partner, optional: true
   has_many :lists
   has_many :partner_requests
+  has_many :participants
+  has_many :games, through: :participants
+  has_many :competitions, through: :games
 
   validates_presence_of :name
   validates :email, uniqueness: true, presence: true

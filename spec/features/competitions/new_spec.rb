@@ -21,7 +21,7 @@ RSpec.describe 'competitions new page', type: :feature do
     fill_in 'competition[point_limit]', with: '10'
     click_button 'Create'
 
-    expect(current_path).to eq(new_participant_path)
-    expect(page).to have_content("Competition Created! Who would you like to be your opponent?")
+    expect(current_path).to eq(new_competition_game_path(Competition.first))
+    expect(page).to have_content("Competition Created! Create a game to get started.")
   end
 end

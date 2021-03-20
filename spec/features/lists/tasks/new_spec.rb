@@ -18,4 +18,15 @@ RSpec.describe 'new list task page', type: :feature do
     expect(page).to have_field('task[status]')
     expect(page).to have_button('Create Task')
   end
+
+  it 'can create a new task' do
+    fill_in 'task[name]', with: "Test Task"
+    fill_in 'task[description]', with: "Test Task description"
+    fill_in 'task[due]', with: "12/25/2021"
+    fill_in 'task[status]', with: "incomplete"
+    click_button 'Create Task'
+
+    expect(current_path).to eq(user_dashboard_index_path(@user1))
+    expect(page).to have_content("Test Task")
+  end
 end

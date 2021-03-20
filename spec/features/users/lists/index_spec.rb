@@ -79,4 +79,30 @@ RSpec.describe 'user lists index page', type: :feature do
       end
     end
   end
+
+  describe 'tasks' do
+    it 'can be deleted' do
+      within("#task-#{@bananas.id}-dropdown") do
+        click_link 'Remove'
+      end
+
+      expect(current_path).to eq(user_lists_path(@user1))
+      
+      within("#list-#{@groceries.id}") do
+        expect(page).to_not have_content(@bananas.name)
+      end
+    end
+
+    it 'can complete and incomplete' do
+      within("#task-#{@bananas.id}-dropdown") do
+        click_link 'Complete'
+      end
+
+      expect(current_path).to eq(user_lists_path(@user1))
+
+      within("#list-#{@groceries.id}-complete") do
+        expect(page).to have_content(@bananas.name)
+      end
+    end
+  end
 end

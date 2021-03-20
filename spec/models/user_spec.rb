@@ -5,6 +5,9 @@ RSpec.describe User, type: :model do
     it { should belong_to(:partner).optional }
     it { should have_many :lists }
     it { should have_many :partner_requests }
+    it { should have_many :participants }
+    it { should have_many(:games).through(:participants) }
+    it { should have_many(:competitions).through(:games) }
   end
   describe 'validations' do
     it { should validate_presence_of :name }
@@ -31,8 +34,18 @@ RSpec.describe User, type: :model do
       @user2 = User.create!(name: "Alexis Sayles", birthday: DateTime.new(1998, 5, 13), email: "Alexissayles@colorado.edu", password: "password")
       @user3 = User.create!(name: "Frank Daidone", birthday: DateTime.new(2001, 1, 1), email: "Frankdaidone@gmail.com", password: "password")
       @user4 = User.create!(name: "Maddie Suter", birthday: DateTime.new(1993, 10, 2), email: "Maddie.suter@gmail.com", password: "password")
-      @user5 = User.create!(name: "Meredith Suter", birthday: DateTime.new(1967, 2, 6), email: "Msuter@ngkf.com", password: "password", partner: @user6)
-      @user6 = User.create!(name: "Sergio Casteneda", birthday: DateTime.new(1962, 1, 25), email: "Sergiocasteneda@cbre.com", password: "password", partner: @user5)
+      @user5 = User.create!(name: "Meredith Suter", birthday: DateTime.new(1967, 2, 6), email: "Msuter@ngkf.com", password: "password")
+      @user6 = User.create!(name: "Sergio Casteneda", birthday: DateTime.new(1962, 1, 25), email: "Sergiocasteneda@cbre.com", password: "password")
+      @user5.partner = @user6
+      @user6.partner = @user5
+
+      @u4_list1 = @user4.lists.create!(name: "user 4 list 1")
+      @u4_list2 = @user4.lists.create!(name: "user 4 list 2")
+      @u5_list1 = @user5.lists.create!(name: "Grocery list")
+      @u5_list2 = @user5.lists.create!(name: "Cooking")
+      @u6_list1 = @user6.lists.create!(name: "Backyard")
+      @u6_list2 = @user6.lists.create!(name: "Garage")
+
       @pr1 = @user1.partner_requests.create!(partner: @user2)
       @pr2 = @user2.partner_requests.create!(partner: @user3)
       @pr3 = @user3.partner_requests.create!(partner: @user2)
@@ -59,6 +72,13 @@ RSpec.describe User, type: :model do
       expect(@user2.pending_requests).to eq([@user3])
       expect(@user3.pending_requests).to eq([@user2])
       expect(@user4.pending_requests).to eq([])
+    end
+
+    it 'combined_lists' do
+      expected = [@u5_list1, @u5_list2, @u6_list1, @u6_list2]
+      
+      expect(@user5.combined_lists.sort).to eq(expected.sort)
+      expect(@user4.combined_lists.sort).to eq(@user4.lists.sort)
     end
   end
 end

@@ -13,7 +13,7 @@ class List::TasksController < ApplicationController
       flash[:notice] = "Task Created!"
       redirect_to user_lists_path(current_user)
     else
-      flash[:notice] = "You must forgot to provide some information."
+      flash[:notice] = "You forgot to provide some information."
       render :new
     end
   end

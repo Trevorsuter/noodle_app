@@ -36,6 +36,13 @@ RSpec.describe 'user dashboard index spec', type: :feature do
     expect(current_path).to eq(user_dashboard_index_path(@user1.id))
   end
 
+  it 'wont submit a request unless the email is for a valid user' do
+    fill_in 'partner_email', with: 'alexsayles@colorado.edu'
+    click_button 'Request'
+
+    expect(page).to have_content("Email Not found, could not submit your request.")
+  end
+
   it 'can field a request from a partner' do
     PartnerRequest.create!(user: @user2, partner: @user1)
     visit user_dashboard_index_path(@user1)

@@ -25,11 +25,11 @@
             <div id="list-<%= list.id %>-incomplete">
               <% list.tasks.each do |task| %>
                 <% if task.incomplete? %>
-                  <div class="btn-group dropright card-body col">
+                  <div class="btn-group dropright card-body col" id="task-<%= task.id %>">
                     <button type="button" class="btn dropdown text-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <%= task.name %>
                     </button>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu" id="task-<%= task.id %>-dropdown">
                       <li class="dropdown-item"><b><i><%= task.description %></i></b></li>
                       <li class="dropdown-item disabled text-danger"><b><i><%= task.due %></i></b></li>
                       <div class="dropdown-divider"></div>
